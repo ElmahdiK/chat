@@ -44,12 +44,14 @@ pre,
   background-color: #eee;
   flex-direction: row;
 }
-#ulContacts {
+#ulContacts,
+#ulSalons {
   background-color: #fafafa;
   list-style: none;
 }
 
-#ulContacts li {
+#ulContacts li,
+#ulSalons li {
   font-weight: bold;
   padding: 4px;
 }
