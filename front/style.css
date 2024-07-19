@@ -1,0 +1,73 @@
+* {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  outline: none;
+  font-family: monospace;
+}
+html,
+body {
+  height: 100%;
+}
+body {
+  background-color: #fafafa;
+}
+pre,
+input,
+button,
+ul {
+  padding: 20px;
+}
+
+main {
+  background-color: #fff;
+  height: calc(100% - 100px);
+  margin: 50px;
+  display: flex;
+  flex-direction: column;
+}
+main span#spTitle {
+  background-color: #3f51b5;
+  color: #eee;
+  padding: 20px;
+  font-size: 32px;
+  text-align: right;
+  font-style: oblique;
+  font-weight: bold;
+}
+pre,
+.divView {
+  flex: 1;
+  display: flex;
+}
+.divView {
+  background-color: #eee;
+  flex-direction: row;
+}
+#ulContacts {
+  background-color: #fafafa;
+  list-style: none;
+}
+
+#ulContacts li {
+  font-weight: bold;
+  padding: 4px;
+}
+main div {
+  background-color: #3f51b5;
+  display: flex;
+  justify-content: space-between;
+}
+main div input {
+  flex: 1;
+}
+main div button:hover {
+  background-color: dodgerblue;
+}
+main div button {
+  background-color: transparent;
+  color: #fff;
+  font-size: 16px;
+  text-transform: uppercase;
+  cursor: pointer;
+}

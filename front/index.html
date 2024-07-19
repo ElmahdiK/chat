@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>chat</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <main>
+        <span id="spTitle">My Tchat !</span>
+        <div class="divView">
+            <pre id="messages"></pre>
+            <ul id="ulContacts">
+                <li>Karim</li>
+                <li>Sami</li>
+                <li>Achraf</li>
+            </ul>
+        </div>
+        <div class="divInput">
+            <input type="text" id="messageBox" placeholder="Votre message" />
+            <button id="sendBtn">envoyer</button>
+        </div>
+    </main>
+    <script>
+        (function () {
+            const messages = document.querySelector('#messages');
+            const messageBox = document.querySelector('#messageBox');
+            const sendBtn = document.querySelector('#sendBtn');
+            let ws;
+            function showMessage(message) {
+                messages.textContent += `${message}\n\n`;
+                messages.scrollTo = messages.scrollHeight;
+                messageBox.value = '';
+            }
+            function init() {
+                if (ws) {
+                    ws.onerror = ws.onopen = ws.onclose = null;
+                    ws.close();
+                }
+
+                ws = new WebSocket('ws://localhost:6969');
+                ws.onopen = () => {
+                    console.log('Connection opened!');
+                }
+                ws.onmessage = ({ data }) => showMessage(data);
+                ws.onclose = function () {
+                    ws = null;
+                }
+            }
+
+            sendBtn.onclick = function () {
+                if (!ws) {
+                    showMessage('No WebSocket connection');
+                    return;
+                }
+                ws.send(messageBox.value);
+                showMessage(messageBox.value)
+            }
+
+            init();
+        })();
+
+    </script>
+
+</body>
+
+</html>
