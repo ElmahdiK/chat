@@ -4,88 +4,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>chat</title>
-    <link rel="stylesheet" href="style.css">
+    <title>Welcome to My Tchat !</title>
 </head>
 
 <body>
-    <main>
-        <span id="spTitle">My Tchat !</span>
-        <div class="divView">
-            <div class="divSalons">
-                <input type="search" placeholder="Rechercher un salon..." />
-                <ul id="ulSalons">
-                    <li>#Cryptos</li>
-                    <li>#Musique</li>
-                    <li>#Jeux Vidéos</li>
-                </ul>
-            </div>
-            <pre id="messages"></pre>
-            <div class="divContacts">
-                <input type="search" placeholder="Rechercher un utilisateur..." />
-                <ul id="ulContacts">
-                    <li>🟢 Simba</li>
-                    <li>🔈 Karim</li>
-                    <li>🔈 Yoann</li>
-                    <li>🟠 Achraf</li>
-                    <li>🟠 Fabrice</li>
-                </ul>
-            </div>
-        </div>
-        <div class="divInput">
-            <input type="text" id="messageBox" placeholder="Votre message" />
-            <button id="sendBtn">➡️</button>
-        </div>
-    </main>
-    <script>
-        (function () {
-            let monPseudo = prompt('pseudo ?');
-            // localStorage.setItem("monPseudo", "Tom");
-            const messages = document.querySelector('#messages');
-            const messageBox = document.querySelector('#messageBox');
-            const sendBtn = document.querySelector('#sendBtn');
-            let ws;
-            function showMessage(message) {
-                messages.textContent += `${message}\n\n`;
-                messages.scrollTo = messages.scrollHeight;
-                messageBox.value = '';
-            }
-            function init() {
-                if (ws) {
-                    ws.onerror = ws.onopen = ws.onclose = null;
-                    ws.close();
-                }
-
-                ws = new WebSocket('ws://localhost:6969');
-                ws.onopen = () => {
-                    console.log('Connection opened!');
-                }
-                ws.onmessage = ({ data }) => showMessage(data);
-                ws.onclose = function () {
-                    ws = null;
-                }
-            }
-
-            sendBtn.onclick = function () {
-                if (!ws) {
-                    showMessage('No WebSocket connection');
-                    return;
-                }
-                ws.send(transformMessage(messageBox.value.toString()));
-                showMessage(transformMessage(messageBox.value.toString()));
-            }
-
-            function transformMessage(message) {
-                let dt = new Date();
-                let time = `${dt.getHours() + `:` + dt.getMinutes() + `:` + dt.getSeconds()}`;
-                return `[${time}] <${monPseudo}> ${message}`
-            }
-
-            init();
-        })();
-
-    </script>
-
+    <h1>Bienvenue sur MyTchat !</h1>
+    <a href="./login.html">Se connecter</a>
 </body>
 
 </html>

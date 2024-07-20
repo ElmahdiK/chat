@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>chat</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <aside id="aside" class="hidden">
+        <div>
+            <input type="text" placeholder="Nouveau pseudo" id="username" name="username" />
+            <button id="confirmBtn">Confirmer</button>
+        </div>
+        <div class="divSalons">
+            <input type="search" placeholder="Rejoindre un salon..." />
+            <ul id="ulSalons">
+                <li>#Cinéma</li>
+                <li>#Musique</li>
+                <li>#JeuxVidéos</li>
+            </ul>
+        </div>
+        <button id="returnBtn">Fermer</button>
+    </aside>
+    <main>
+        <header>
+            <button id="menuBtn">Menu</button>
+            <span id="spTitle"><span id="sp_username"></span>, Welcome to My Tchat !</span>
+            <div class="divAnnonce">
+                <span>Votre annonce ici</span>
+                <img src="https://pbs.twimg.com/media/EJWcGOiWwAAk95Q?format=jpg&name=4096x4096" />
+            </div>
+        </header>
+        <div class="divView">
+            <pre id="messages"></pre>
+            <section>
+                <div class="divContacts">
+                    <input type="search" placeholder="Rechercher un utilisateur..." />
+                    <ul id="ulContacts">
+                        <li>🟢 Elmahdi</li>
+                        <li>🔈 User1</li>
+                        <li>🔈 User2</li>
+                        <li>🟠 User3</li>
+                    </ul>
+                </div>
+            </section>
+        </div>
+        <div class="divInput">
+            <input type="text" id="messageBox" placeholder="Votre message" />
+            <button id="sendBtn">Envoyer</button>
+        </div>
+    </main>
+    <script>
+        (function () {
+            let sp_username = document.querySelector('#sp_username');
+            let monPseudo = localStorage.getItem("monPseudo") ?? prompt('pseudo ?');
+            sp_username.textContent = monPseudo;
+            const messages = document.querySelector('#messages');
+            const messageBox = document.querySelector('#messageBox');
+            const sendBtn = document.querySelector('#sendBtn');
+            let ws;
+            function showMessage(message) {
+                messages.textContent += `${message}\n\n`;
+                messages.scrollTo = messages.scrollHeight;
+                messageBox.value = '';
+            }
+            function init() {
+                if (ws) {
+                    ws.onerror = ws.onopen = ws.onclose = null;
+                    ws.close();
+                }
+
+                ws = new WebSocket('ws://localhost:6969');
+                ws.onopen = () => {
+                    console.log('Connection opened!');
+                    let sysAdmin = "MyTchat";
+                    let msgConnexion = `${monPseudo} vient de se connecter !`;
+                    ws.send(transformMessage(sysAdmin, msgConnexion));
+                    showMessage(transformMessage(sysAdmin, msgConnexion));
+                }
+                ws.onmessage = ({ data }) => showMessage(data);
+                ws.onclose = function () {
+                    // let msgConnexion = `${monPseudo} s'est déconnecter`;
+                    // ws.send(transformMessage(msgConnexion));
+                    // showMessage(transformMessage(msgConnexion));
+                    ws = null;
+                }
+            }
+
+            sendBtn.onclick = function () {
+                if (!ws) {
+                    showMessage('No WebSocket connection');
+                    return;
+                }
+                ws.send(transformMessage(monPseudo, messageBox.value.toString()));
+                showMessage(transformMessage(monPseudo, messageBox.value.toString()));
+            }
+
+            const transformMessage = (username, message) => `[${showTime()}] <${username}> ${message}`;
+
+            const showTime = () => {
+                const dt = new Date();
+                const hh = dt.getHours();
+                const mm = dt.getMinutes();
+                const ss = dt.getSeconds();
+                const time = [hh, mm, ss].map(x => `${x}`.padStart(2, `0`)).join(':')
+                return time;
+            }
+
+            // show Menu
+            let menuBtn = document.querySelector('#menuBtn');
+            menuBtn.onclick = () => showMenu();
+
+            const showMenu = () => {
+                let aside = document.querySelector('#aside');
+                aside.classList.remove('hidden');
+            }
+
+            // hide Menu
+            let returnBtn = document.querySelector('#returnBtn');
+            returnBtn.onclick = () => hideMenu();
+
+            const hideMenu = () => {
+                let aside = document.querySelector('#aside');
+                aside.classList.add('hidden');
+            }
+
+
+            let username = document.querySelector('#username');
+            let confirmBtn = document.querySelector('#confirmBtn');
+            confirmBtn.onclick = () => {
+                let newPseudo = username.value.trim();
+                if (newPseudo) {
+                    console.log(username.value);
+                    localStorage.setItem("monPseudo", username.value);
+                    monPseudo = localStorage.getItem("monPseudo");
+                    sp_username.textContent = monPseudo;
+                    // username.value = '';
+                    hideMenu();
+                }
+            }
+            init();
+        })();
+
+    </script>
+
+</body>
+
+</html>

@@ -5,6 +5,10 @@
   outline: none;
   font-family: monospace;
 }
+:root {
+  --colorBlack: #000;
+  --colorWhite: #fff;
+}
 html,
 body {
   height: 100%;
@@ -12,13 +16,70 @@ body {
 body {
   background-color: #fafafa;
 }
+button {
+  text-transform: uppercase;
+  cursor: pointer;
+}
 pre,
 input,
-button,
 ul {
   padding: 20px;
 }
-
+.divAnnonce {
+  width: 600px;
+  height: 120px;
+  position: relative;
+}
+.divAnnonce img {
+  width: 100%;
+  object-fit: cover;
+}
+.divAnnonce span {
+  position: absolute;
+  color: #fff;
+  font-size: 22px;
+  left: 0px;
+  right: 0px;
+  bottom: 0px;
+  text-align: center;
+  line-height: 60px;
+  text-shadow: 0px 2px 0px #111;
+  background-color: rgba(0, 0, 0, 0.4);
+}
+aside {
+  background-color: #3f51b5;
+  /* display: none; */
+  position: fixed;
+  top: 0px;
+  left: 0px;
+  bottom: 0px;
+  padding: 20px;
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column;
+}
+aside p {
+  font-size: 22px;
+  color: #eee;
+}
+aside div {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+.hidden {
+  display: none;
+}
+aside button:hover {
+  background-color: rgba(0, 0, 0, 0.4);
+}
+aside button {
+  background-color: transparent;
+  border: 1px solid var(--colorWhite);
+  color: #fff;
+  padding: 10px;
+  text-transform: uppercase;
+}
 main {
   background-color: #fff;
   /* height: calc(100% - 100px); */
@@ -27,8 +88,27 @@ main {
   display: flex;
   flex-direction: column;
 }
-main span#spTitle {
+main header {
+  border: 1px solid var(--colorBlack);
   background-color: #3f51b5;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+main header button,
+main header span {
+  margin: 10px;
+}
+main header button:hover {
+  background-color: rgba(0, 0, 0, 0.4);
+}
+main header button {
+  background-color: transparent;
+  border: 1px solid var(--colorWhite);
+  color: #fff;
+  padding: 20px;
+}
+main span#spTitle {
   color: #eee;
   padding: 20px;
   font-size: 32px;
@@ -47,10 +127,12 @@ pre,
 }
 pre {
   flex: 1;
+  border: 1px solid var(--colorBlack);
 }
 .divSalons,
 .divContacts {
   flex-direction: column;
+  border: 1px solid var(--colorBlack);
 }
 
 #ulContacts,
@@ -71,16 +153,33 @@ main div {
   display: flex;
   justify-content: space-between;
 }
+main .divInput {
+  border: 1px solid var(--colorBlack);
+}
 main .divInput input {
   flex: 1;
 }
 main div button:hover {
-  background-color: dodgerblue;
+  background-color: rgba(0, 0, 0, 0.4);
 }
 main div button {
   background-color: transparent;
+  border: 1px solid var(--colorWhite);
   color: #fff;
   font-size: 16px;
   text-transform: uppercase;
   cursor: pointer;
+  padding: 20px;
+}
+main section {
+  display: flex;
+  flex-direction: column;
+}
+
+main section .divContacts {
+  flex: 2;
+}
+
+main section .divSalons {
+  flex: 1;
 }

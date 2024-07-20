@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Welcome to My Tchat !</title>
+</head>
+
+<body>
+    <input type="text" placeholder="Votre pseudo" id="username" name="username" />
+    <button id="enterBtn">Entrer</button>
+    <script>
+        let username = document.querySelector('#username');
+        let enterBtn = document.querySelector('#enterBtn');
+        enterBtn.onclick = () => {
+            console.log(username.value);
+            localStorage.setItem("monPseudo", username.value);
+            location.href = "./chat.html"
+        }
+    </script>
+</body>
+
+</html>
