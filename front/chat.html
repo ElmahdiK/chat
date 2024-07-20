@@ -39,7 +39,7 @@
                 <div class="divContacts">
                     <input type="search" placeholder="Rechercher un utilisateur..." />
                     <ul id="ulContacts">
-                        <li>🟢 Elmahdi</li>
+                        <li>🟢 <span id="sp_username2"></span></li>
                         <li>🔈 User1</li>
                         <li>🔈 User2</li>
                         <li>🟠 User3</li>
@@ -55,8 +55,9 @@
     <script>
         (function () {
             let sp_username = document.querySelector('#sp_username');
+            let sp_username2 = document.querySelector('#sp_username2');
             let monPseudo = localStorage.getItem("monPseudo") ?? prompt('pseudo ?');
-            sp_username.textContent = monPseudo;
+            sp_username.textContent = sp_username2.textContent = monPseudo;
             const messages = document.querySelector('#messages');
             const messageBox = document.querySelector('#messageBox');
             const sendBtn = document.querySelector('#sendBtn');
@@ -136,7 +137,7 @@
                     console.log(username.value);
                     localStorage.setItem("monPseudo", username.value);
                     monPseudo = localStorage.getItem("monPseudo");
-                    sp_username.textContent = monPseudo;
+                    sp_username.textContent = sp_username2.textContent = monPseudo;
                     // username.value = '';
                     hideMenu();
                 }
