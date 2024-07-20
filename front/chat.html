@@ -76,7 +76,7 @@
                 }
 
 
-                let domain = 'mytchat.netlify.app'; //localhost;
+                let domain = 'localhost'; //mytchat.netlify.app';
                 ws = new WebSocket(`ws://${domain}:6969`);
                 ws.onopen = () => {
                     console.log('Connection opened!');
@@ -94,7 +94,7 @@
                 }
             }
 
-            sendBtn.onclick = function () {
+            const sendMsg = () => {
                 if (!ws) {
                     showMessage('No WebSocket connection');
                     return;
@@ -102,6 +102,17 @@
                 ws.send(transformMessage(monPseudo, messageBox.value.toString()));
                 showMessage(transformMessage(monPseudo, messageBox.value.toString()));
             }
+            sendBtn.onclick = () => sendMsg();
+
+            messageBox.addEventListener("keypress", function (event) {
+                // If the user presses the "Enter" key on the keyboard
+                if (event.key === "Enter") {
+                    // Cancel the default action, if needed
+                    event.preventDefault();
+                    // Trigger the button element with a click
+                    document.getElementById("sendBtn").click();
+                }
+            });
 
             const transformMessage = (username, message) => `[${showTime()}] <${username}> ${message}`;
 
