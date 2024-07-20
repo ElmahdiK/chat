@@ -12,26 +12,35 @@
     <main>
         <span id="spTitle">My Tchat !</span>
         <div class="divView">
-            <ul id="ulSalons">
-                <li>Cryptos</li>
-                <li>Musique</li>
-                <li>Jeux Vidéos</li>
-            </ul>
+            <div class="divSalons">
+                <input type="search" placeholder="Rechercher un salon..." />
+                <ul id="ulSalons">
+                    <li>#Cryptos</li>
+                    <li>#Musique</li>
+                    <li>#Jeux Vidéos</li>
+                </ul>
+            </div>
             <pre id="messages"></pre>
-            <ul id="ulContacts">
-                <li>Karim</li>
-                <li>Yoann</li>
-                <li>Achraf</li>
-                <li>Fabrice</li>
-            </ul>
+            <div class="divContacts">
+                <input type="search" placeholder="Rechercher un utilisateur..." />
+                <ul id="ulContacts">
+                    <li>🟢 Simba</li>
+                    <li>🔈 Karim</li>
+                    <li>🔈 Yoann</li>
+                    <li>🟠 Achraf</li>
+                    <li>🟠 Fabrice</li>
+                </ul>
+            </div>
         </div>
         <div class="divInput">
             <input type="text" id="messageBox" placeholder="Votre message" />
-            <button id="sendBtn">envoyer</button>
+            <button id="sendBtn">➡️</button>
         </div>
     </main>
     <script>
         (function () {
+            let monPseudo = prompt('pseudo ?');
+            // localStorage.setItem("monPseudo", "Tom");
             const messages = document.querySelector('#messages');
             const messageBox = document.querySelector('#messageBox');
             const sendBtn = document.querySelector('#sendBtn');
@@ -62,8 +71,14 @@
                     showMessage('No WebSocket connection');
                     return;
                 }
-                ws.send(messageBox.value);
-                showMessage(messageBox.value)
+                ws.send(transformMessage(messageBox.value.toString()));
+                showMessage(transformMessage(messageBox.value.toString()));
+            }
+
+            function transformMessage(message) {
+                let dt = new Date();
+                let time = `${dt.getHours() + `:` + dt.getMinutes() + `:` + dt.getSeconds()}`;
+                return `[${time}] <${monPseudo}> ${message}`
             }
 
             init();

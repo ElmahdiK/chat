@@ -21,8 +21,9 @@ ul {
 
 main {
   background-color: #fff;
-  height: calc(100% - 100px);
-  margin: 50px;
+  /* height: calc(100% - 100px); */
+  /* margin: 50px; */
+  height: 100%;
   display: flex;
   flex-direction: column;
 }
@@ -31,23 +32,33 @@ main span#spTitle {
   color: #eee;
   padding: 20px;
   font-size: 32px;
-  text-align: right;
+  text-align: center;
   font-style: oblique;
   font-weight: bold;
 }
 pre,
 .divView {
-  flex: 1;
   display: flex;
 }
 .divView {
   background-color: #eee;
   flex-direction: row;
+  flex: 1;
 }
+pre {
+  flex: 1;
+}
+.divSalons,
+.divContacts {
+  flex-direction: column;
+}
+
 #ulContacts,
 #ulSalons {
+  flex: 1;
   background-color: #fafafa;
   list-style: none;
+  padding: 50px;
 }
 
 #ulContacts li,
@@ -60,7 +71,7 @@ main div {
   display: flex;
   justify-content: space-between;
 }
-main div input {
+main .divInput input {
   flex: 1;
 }
 main div button:hover {
