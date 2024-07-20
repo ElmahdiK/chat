@@ -48,15 +48,19 @@ ul {
 }
 aside {
   background-color: #3f51b5;
+  box-shadow: 1px 4px 10px #333;
+  border-right: 1px solid var(--colorWhite);
   /* display: none; */
   position: fixed;
   top: 0px;
   left: 0px;
   bottom: 0px;
-  padding: 20px;
   display: flex;
   justify-content: space-between;
   flex-direction: column;
+  width: calc(300px - 102px);
+  padding: 50px;
+  transition: 0.3s;
 }
 aside p {
   font-size: 22px;
@@ -68,7 +72,8 @@ aside div {
   gap: 5px;
 }
 .hidden {
-  display: none;
+  /* display: none; */
+  left: -300px;
 }
 aside button:hover {
   background-color: rgba(0, 0, 0, 0.4);
