@@ -76,7 +76,7 @@
                 }
 
 
-                let domain = 'localhost'; //mytchat.netlify.app';
+                let domain = 'mytchat.netlify.app'; //localhost;
                 ws = new WebSocket(`ws://${domain}:6969`);
                 ws.onopen = () => {
                     console.log('Connection opened!');
