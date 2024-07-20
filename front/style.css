@@ -8,13 +8,13 @@
 :root {
   --colorBlack: #000;
   --colorWhite: #fff;
+  --colorBlue: #3f51b5;
 }
 html,
 body {
   height: 100%;
 }
 body {
-  background-color: #fafafa;
 }
 button {
   text-transform: uppercase;
@@ -47,7 +47,7 @@ ul {
   background-color: rgba(0, 0, 0, 0.4);
 }
 aside {
-  background-color: #3f51b5;
+  background-color: var(--colorBlue);
   box-shadow: 1px 4px 10px #333;
   border-right: 1px solid var(--colorWhite);
   /* display: none; */
@@ -86,7 +86,6 @@ aside button {
   text-transform: uppercase;
 }
 main {
-  background-color: #fff;
   /* height: calc(100% - 100px); */
   /* margin: 50px; */
   height: 100%;
@@ -94,8 +93,8 @@ main {
   flex-direction: column;
 }
 main header {
+  background-color: var(--colorBlue);
   border: 1px solid var(--colorBlack);
-  background-color: #3f51b5;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -126,11 +125,12 @@ pre,
   display: flex;
 }
 .divView {
-  background-color: #eee;
   flex-direction: row;
   flex: 1;
+  padding: 40px;
 }
 pre {
+  background-color: #eee;
   flex: 1;
   border: 1px solid var(--colorBlack);
 }
@@ -139,7 +139,10 @@ pre {
   flex-direction: column;
   border: 1px solid var(--colorBlack);
 }
-
+.divContacts {
+  background-color: var(--colorBlue);
+  padding: 40px;
+}
 #ulContacts,
 #ulSalons {
   flex: 1;
@@ -154,12 +157,13 @@ pre {
   padding: 4px;
 }
 main div {
-  background-color: #3f51b5;
   display: flex;
   justify-content: space-between;
 }
 main .divInput {
+  background-color: var(--colorBlue);
   border: 1px solid var(--colorBlack);
+  padding: 40px;
 }
 main .divInput input {
   flex: 1;
