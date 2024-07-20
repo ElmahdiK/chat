@@ -73,7 +73,7 @@
                     ws.close();
                 }
 
-                ws = new WebSocket('ws://localhost:6969');
+                ws = new WebSocket('ws://mytchat.netlify.app:6969');
                 ws.onopen = () => {
                     console.log('Connection opened!');
                     let sysAdmin = "MyTchat";
